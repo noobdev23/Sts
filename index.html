@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!--=============== FAVICON ===============-->
+   <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+   <!--=============== REMIXICONS ===============-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
+   <!--=============== TAILWIND CSS CDN ===============-->
+   <script src="https://cdn.tailwindcss.com"></script>
+
+   <!--=============== LUCIDE ICONS ===============-->
+   <script src="https://unpkg.com/lucide@latest"></script>
+
+   <!--=============== MAIN CSS ===============-->
+   <link rel="stylesheet" href="assets/css/styles.css">
+
+   <title>SaveTheSilent // Wildlife Conservation & Biosphere Directory</title>
+
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+      body {
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          background-color: #061a12;
+          color: #ecfdf5;
+          -webkit-tap-highlight-color: transparent;
+      }
+
+      .code-font {
+          font-family: 'Fira Code', monospace;
+      }
+
+      .glow-emerald {
+          box-shadow: 0 0 25px rgba(16, 185, 129, 0.15);
+      }
+
+      .glow-card:active, .glow-card:hover {
+          box-shadow: 0 0 20px rgba(52, 211, 153, 0.25);
+          border-color: rgba(52, 211, 153, 0.6);
+      }
+
+      .pulse-bg {
+          animation: pulse-animation 3s infinite ease-in-out;
+      }
+
+      @keyframes pulse-animation {
+          0%, 100% { transform: scale(1); opacity: 0.9; }
+          50% { transform: scale(1.05); opacity: 1; }
+      }
+      
+      @media (max-width: 640px) {
+          .mobile-sheet {
+              border-bottom-left-radius: 0;
+              border-bottom-right-radius: 0;
+          }
+      }
+   </style>
+</head>
+
+<body class="bg-emerald-950 text-emerald-50 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-emerald-950 antialiased">
+
+   <!-- Background Grid Overlay -->
+   <div class="fixed inset-0 bg-[linear-gradient(to_right,#052e1615_1px,transparent_1px),linear-gradient(to_bottom,#052e1615_1px,transparent_1px)] bg-[size:3rem_3rem] md:bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none"></div>
+
+   <!--==================== HEADER ====================-->
+   <header class="relative z-30 border-b border-emerald-800/60 bg-emerald-950/90 backdrop-blur-md sticky top-0" id="header">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+         <a href="#" class="text-xl sm:text-2xl font-extrabold tracking-tight text-white code-font flex items-center gap-2">
+            <span class="p-1.5 bg-emerald-800/80 rounded-lg text-emerald-300 border border-emerald-600/40">
+               <i data-lucide="trees" class="w-5 h-5"></i>
+            </span>
+            SaveThe<span class="text-emerald-400">Silent</span>
+         </a>
+
+         <!-- Desktop Navigation -->
+         <div class="hidden md:flex items-center gap-6 text-xs font-bold code-font">
+            <a href="#home" class="text-emerald-300 hover:text-emerald-100 transition-colors py-2">HOME</a>
+            <a href="#species-tool" class="text-emerald-300 hover:text-emerald-100 transition-colors py-2">SPECIES SEARCH</a>
+            <a href="#about" class="text-emerald-300 hover:text-emerald-100 transition-colors py-2">ABOUT US</a>
+            <a href="#contact" class="text-emerald-300 hover:text-emerald-100 transition-colors py-2">CONTACT US</a>
+         </div>
+
+         <div class="flex items-center gap-3">
+            <a href="https://www.patreon.com/Safew1" target="_blank" rel="noopener noreferrer" class="px-3.5 py-2 sm:px-5 sm:py-2.5 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl text-xs code-font transition-all shadow-md active:scale-95">
+               SUPPORT
+            </a>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-emerald-300 hover:text-white rounded-lg focus:outline-none bg-emerald-900/60 border border-emerald-700/60" aria-label="Toggle menu">
+               <i data-lucide="menu" id="menu-icon" class="w-5 h-5"></i>
+            </button>
+         </div>
+      </nav>
+
+      <!-- Mobile Slide-Down Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-emerald-950/95 border-b border-emerald-800 px-4 py-4 space-y-3 text-sm font-semibold code-font backdrop-blur-lg">
+         <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-emerald-200 border-b border-emerald-900">HOME</a>
+         <a href="#species-tool" onclick="toggleMobileMenu()" class="block py-2 text-emerald-200 border-b border-emerald-900">SPECIES SEARCH</a>
+         <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-emerald-200 border-b border-emerald-900">ABOUT US</a>
+         <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-emerald-200">CONTACT US</a>
+      </div>
+   </header>
+
+   <!--==================== MAIN ====================-->
+   <main class="relative z-10 flex-grow" id="home">
+      
+      <!--==================== HERO SECTION ====================-->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-20 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+         <div class="text-left">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-900/80 border border-emerald-700/60 text-emerald-300 text-[11px] sm:text-xs font-semibold code-font mb-4">
+               <i data-lucide="shield-check" class="w-3.5 h-3.5 text-emerald-400"></i> Global Wildlife Initiative
+            </span>
+
+            <h1 class="text-3xl sm:text-5xl font-black text-white leading-tight mb-4 sm:mb-6">
+               Protecting the <span class="text-emerald-400">Voice</span> of Earth's Wildlife
+            </h1>
+
+            <p class="text-emerald-100/80 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
+               Welcome to SaveTheSilent. Search our database to explore wildlife dependency data and critical ecological roles.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+               <a href="#species-tool" class="w-full sm:w-auto text-center px-6 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl text-xs sm:text-sm code-font transition-all shadow-lg active:scale-95">
+                  Search 100 Species
+               </a>
+               <a href="#about" class="w-full sm:w-auto text-center px-6 py-3.5 bg-emerald-900/80 hover:bg-emerald-800 border border-emerald-700/80 text-emerald-200 font-semibold rounded-xl text-xs sm:text-sm code-font transition-all active:scale-95">
+                  Learn About Us
+               </a>
+            </div>
+         </div>
+
+         <div class="flex justify-center mt-4 md:mt-0">
+            <div class="w-full max-w-sm sm:w-80 sm:h-80 rounded-2xl bg-gradient-to-tr from-emerald-900 to-emerald-800 border border-emerald-700/50 p-6 flex flex-col justify-center items-center text-center shadow-xl relative overflow-hidden">
+               <div class="p-4 bg-emerald-950/80 rounded-2xl border border-emerald-600/40 text-emerald-400 mb-3 pulse-bg">
+                  <i data-lucide="globe-2" class="w-10 h-10"></i>
+               </div>
+               <h3 class="text-lg font-bold text-white mb-1 code-font">100 Keystone Species</h3>
+               <p class="text-xs text-emerald-200/80">Interactive biosphere lookup and ecosystem analytics.</p>
+            </div>
+         </div>
+      </section>
+
+      <!--==================== 100 KEYSTONE SPECIES SEARCH TOOL ====================-->
+      <section class="py-10 sm:py-16 bg-emerald-900/40 border-y border-emerald-800/80" id="species-tool">
+         <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full">
+            
+            <!-- Tool Header -->
+            <div class="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+               <span class="text-emerald-400 text-[10px] sm:text-xs font-bold tracking-widest code-font block mb-1">SAVETHESILENT.ORG // SEARCH</span>
+               <h2 class="text-2xl sm:text-3xl font-extrabold text-white code-font mb-2">
+                  Find Keystone Species
+               </h2>
+               <p class="text-xs text-emerald-200/70 code-font">
+                  Type an animal name in the search bar to instantly load species impact cards.
+               </p>
+            </div>
+
+            <!-- Search Input Bar -->
+            <div class="max-w-2xl mx-auto relative glow-emerald rounded-2xl mb-6">
+               <div class="relative flex items-center">
+                  <i data-lucide="search" class="w-5 h-5 absolute left-4 text-emerald-400 pointer-events-none"></i>
+                  <input 
+                     type="text" 
+                     id="search-input"
+                     placeholder="Type animal name (e.g., Tiger, Bee, Otter)..." 
+                     class="w-full bg-emerald-950/90 border border-emerald-700/80 rounded-2xl py-4 pl-12 pr-10 text-white placeholder-emerald-500/70 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/40 text-sm sm:text-base code-font transition-all min-h-[52px]"
+                     onkeyup="filterSpecies()"
+                  >
+                  <button onclick="clearSearch()" id="clear-btn" class="absolute right-3 p-1 text-emerald-500 hover:text-emerald-200 hidden" aria-label="Clear search">
+                     <i data-lucide="x-circle" class="w-5 h-5"></i>
+                  </button>
+               </div>
+            </div>
+
+            <!-- Category Quick Tags (Touch-friendly Horizontal Scroll) -->
+            <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 scrollbar-none text-xs code-font -mx-4 px-4 sm:mx-0 sm:px-0 sm:justify-center" id="category-filters">
+               <span class="text-emerald-400/70 shrink-0 text-[11px]">Try:</span>
+               <button onclick="setSearch('Tiger')" class="shrink-0 px-3 py-2 bg-emerald-950/90 active:bg-emerald-800 border border-emerald-700/80 rounded-xl text-emerald-300">Tiger</button>
+               <button onclick="setSearch('Elephant')" class="shrink-0 px-3 py-2 bg-emerald-950/90 active:bg-emerald-800 border border-emerald-700/80 rounded-xl text-emerald-300">Elephant</button>
+               <button onclick="setSearch('Bee')" class="shrink-0 px-3 py-2 bg-emerald-950/90 active:bg-emerald-800 border border-emerald-700/80 rounded-xl text-emerald-300">Bee</button>
+               <button onclick="setSearch('Marine')" class="shrink-0 px-3 py-2 bg-emerald-950/90 active:bg-emerald-800 border border-emerald-700/80 rounded-xl text-emerald-300">Marine</button>
+               <button onclick="setSearch('Bird')" class="shrink-0 px-3 py-2 bg-emerald-950/90 active:bg-emerald-800 border border-emerald-700/80 rounded-xl text-emerald-300">Bird</button>
+            </div>
+
+            <!-- Initial Empty State -->
+            <div id="empty-state" class="text-center py-12 px-4 bg-emerald-950/60 rounded-2xl border border-emerald-800/60 max-w-md mx-auto">
+               <div class="p-3 bg-emerald-900/60 rounded-full w-14 h-14 mx-auto flex items-center justify-center text-emerald-400 mb-3 border border-emerald-700/60">
+                  <i data-lucide="search-code" class="w-7 h-7"></i>
+               </div>
+               <h3 class="text-base font-bold text-white mb-1 code-font">Search Ready</h3>
+               <p class="text-xs text-emerald-300/70 code-font">Type an animal name above to display its ecosystem card.</p>
+            </div>
+
+            <!-- Species Results Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 my-2" id="species-grid">
+               <!-- JavaScript populates dynamic cards here -->
+            </div>
+
+         </div>
+      </section>
+
+      <!--==================== ABOUT US SECTION ====================-->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20 border-b border-emerald-800/60" id="about">
+         <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
+            <span class="text-emerald-400 text-[10px] sm:text-xs font-bold tracking-widest code-font block mb-2">SAVETHESILENT.ORG // MISSION & VISION</span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white code-font mb-4">About SaveTheSilent</h2>
+            <p class="text-sm sm:text-base text-emerald-200/80 leading-relaxed">
+               SaveTheSilent is an independent wildlife conservation initiative dedicated to mapping, monitoring, and communicating the vital roles of keystone species across global ecosystems.
+            </p>
+         </div>
+
+         <!-- Core Pillars Grid -->
+         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-emerald-900/40 border border-emerald-800/80 p-6 rounded-2xl">
+               <div class="p-3 bg-emerald-950/80 rounded-xl text-emerald-400 border border-emerald-700/60 w-fit mb-4">
+                  <i data-lucide="database" class="w-6 h-6"></i>
+               </div>
+               <h3 class="text-lg font-bold text-white code-font mb-2">Ecological Mapping</h3>
+               <p class="text-xs sm:text-sm text-emerald-200/70 leading-relaxed">
+                  Cataloging over 100 vital keystone species to analyze their domino effect on global climate, watersheds, and nutrient systems.
+               </p>
+            </div>
+
+            <div class="bg-emerald-900/40 border border-emerald-800/80 p-6 rounded-2xl">
+               <div class="p-3 bg-emerald-950/80 rounded-xl text-emerald-400 border border-emerald-700/60 w-fit mb-4">
+                  <i data-lucide="eye" class="w-6 h-6"></i>
+               </div>
+               <h3 class="text-lg font-bold text-white code-font mb-2">Habitat Vigilance</h3>
+               <p class="text-xs sm:text-sm text-emerald-200/70 leading-relaxed">
+                  Raising awareness for threatened apex predators, key pollinators, and marine organisms that sustain ecosystem stability.
+               </p>
+            </div>
+
+            <div class="bg-emerald-900/40 border border-emerald-800/80 p-6 rounded-2xl">
+               <div class="p-3 bg-emerald-950/80 rounded-xl text-emerald-400 border border-emerald-700/60 w-fit mb-4">
+                  <i data-lucide="users" class="w-6 h-6"></i>
+               </div>
+               <h3 class="text-lg font-bold text-white code-font mb-2">Community Action</h3>
+               <p class="text-xs sm:text-sm text-emerald-200/70 leading-relaxed">
+                  Empowering researchers, naturalists, and grassroots supporters to directly participate in conservation advocacy.
+               </p>
+            </div>
+         </div>
+
+         <!-- Statistics Banner -->
+         <div class="bg-gradient-to-r from-emerald-900/80 via-emerald-950 to-emerald-900/80 border border-emerald-800 rounded-2xl p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div>
+               <p class="text-2xl sm:text-3xl font-black text-emerald-400 code-font">100+</p>
+               <p class="text-xs text-emerald-200/80 code-font mt-1">Keystone Species</p>
+            </div>
+            <div>
+               <p class="text-2xl sm:text-3xl font-black text-emerald-400 code-font">50+</p>
+               <p class="text-xs text-emerald-200/80 code-font mt-1">Global Biomes</p>
+            </div>
+            <div>
+               <p class="text-2xl sm:text-3xl font-black text-emerald-400 code-font">24/7</p>
+               <p class="text-xs text-emerald-200/80 code-font mt-1">Directory Access</p>
+            </div>
+            <div>
+               <p class="text-2xl sm:text-3xl font-black text-emerald-400 code-font">100%</p>
+               <p class="text-xs text-emerald-200/80 code-font mt-1">Independent Driven</p>
+            </div>
+         </div>
+      </section>
+
+      <!--==================== CONTACT US SECTION ====================-->
+      <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20" id="contact">
+         <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <span class="text-emerald-400 text-[10px] sm:text-xs font-bold tracking-widest code-font block mb-2">SAVETHESILENT.ORG // GET IN TOUCH</span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-white code-font mb-3">Contact Us</h2>
+            <p class="text-xs sm:text-sm text-emerald-200/70 code-font">
+               Have questions, partnership proposals, or wildlife data updates? Send us a message below.
+            </p>
+         </div>
+
+         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto items-start">
+            
+            <!-- Contact Info Cards Column -->
+            <div class="space-y-4">
+               <div class="bg-emerald-900/50 border border-emerald-800/80 p-5 rounded-2xl flex items-start gap-4">
+                  <div class="p-3 bg-emerald-950/80 rounded-xl text-emerald-400 border border-emerald-700/60 shrink-0">
+                     <i data-lucide="phone-call" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                     <h3 class="text-sm font-bold text-white code-font">Direct Phone</h3>
+                     <p class="text-sm text-emerald-200 mt-1">+91 8530411406</p>
+                     <p class="text-[11px] text-emerald-400 code-font mt-0.5">Mon - Sat (9:00 AM - 10:00 PM IST)</p>
+                  </div>
+               </div>
+
+               <div class="bg-emerald-900/50 border border-emerald-800/80 p-5 rounded-2xl flex items-start gap-4">
+                  <div class="p-3 bg-emerald-950/80 rounded-xl text-emerald-400 border border-emerald-700/60 shrink-0">
+                     <i data-lucide="message-square" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                     <h3 class="text-sm font-bold text-white code-font">Instant Messaging</h3>
+                     <div class="flex gap-4 text-2xl text-emerald-400 mt-2">
+                        <a href="https://api.whatsapp.com/send?phone=918530411406&text=Hello, more information!" target="_blank" class="hover:text-emerald-200 transition-colors" aria-label="WhatsApp">
+                           <i class="ri-whatsapp-fill"></i>
+                        </a>
+                        <a href="https://m.me/bedimcode" target="_blank" class="hover:text-emerald-200 transition-colors" aria-label="Messenger">
+                           <i class="ri-messenger-fill"></i>
+                        </a>
+                        <a href="https://t.me/telegram" target="_blank" class="hover:text-emerald-200 transition-colors" aria-label="Telegram">
+                           <i class="ri-telegram-2-fill"></i>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="bg-emerald-900/50 border border-emerald-800/80 p-5 rounded-2xl flex items-start gap-4">
+                  <div class="p-3 bg-emerald-950/80 rounded-xl text-emerald-400 border border-emerald-700/60 shrink-0">
+                     <i data-lucide="map-pin" class="w-5 h-5"></i>
+                  </div>
+                  <div>
+                     <h3 class="text-sm font-bold text-white code-font">Location Hub</h3>
+                     <p class="text-sm text-emerald-200 mt-1">Nagpur, Maharashtra, India</p>
+                     <p class="text-[11px] text-emerald-400 code-font mt-0.5">Conservation Research & Operations</p>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Contact Interactive Form -->
+            <div class="lg:col-span-2 bg-emerald-900/40 border border-emerald-800/80 p-6 sm:p-8 rounded-2xl">
+               <h3 class="text-xl font-bold text-white code-font mb-4">Send a Direct Message</h3>
+               <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                     <div>
+                        <label class="block text-xs font-semibold text-emerald-300 code-font mb-1.5">Your Name</label>
+                        <input type="text" required placeholder="John Doe" class="w-full bg-emerald-950/90 border border-emerald-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-emerald-600 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400">
+                     </div>
+                     <div>
+                        <label class="block text-xs font-semibold text-emerald-300 code-font mb-1.5">Email Address</label>
+                        <input type="email" required placeholder="john@example.com" class="w-full bg-emerald-950/90 border border-emerald-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-emerald-600 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400">
+                     </div>
+                  </div>
+
+                  <div>
+                     <label class="block text-xs font-semibold text-emerald-300 code-font mb-1.5">Subject</label>
+                     <input type="text" required placeholder="Inquiry about species data / partnership" class="w-full bg-emerald-950/90 border border-emerald-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-emerald-600 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400">
+                  </div>
+
+                  <div>
+                     <label class="block text-xs font-semibold text-emerald-300 code-font mb-1.5">Message</label>
+                     <textarea rows="4" required placeholder="Type your message here..." class="w-full bg-emerald-950/90 border border-emerald-700/80 rounded-xl px-4 py-3 text-sm text-white placeholder-emerald-600 focus:outline-none focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400"></textarea>
+                  </div>
+
+                  <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-emerald-950 font-bold rounded-xl text-xs sm:text-sm code-font transition-all active:scale-95 flex items-center justify-center gap-2">
+                     <i data-lucide="send" class="w-4 h-4"></i> Send Message
+                  </button>
+
+                  <div id="form-status" class="hidden text-xs code-font p-3 rounded-xl bg-emerald-950 border border-emerald-600 text-emerald-300 text-center">
+                     Thank you! Your message has been prepared. We will get back to you shortly.
+                  </div>
+               </form>
+            </div>
+
+         </div>
+      </section>
+   </main>
+
+   <!--==================== FOOTER ====================-->
+   <footer class="border-t border-emerald-800/80 bg-emerald-950 py-8">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center sm:text-left mb-6">
+         <div>
+            <h3 class="text-xs font-bold text-white code-font mb-2">SaveTheSilent</h3>
+            <p class="text-[11px] text-emerald-300/70">Wildlife ecosystem monitoring & conservation platform.</p>
+         </div>
+
+         <div class="text-center">
+            <h3 class="text-xs font-bold text-white code-font mb-2">Socials</h3>
+            <div class="flex justify-center gap-4 text-lg text-emerald-400">
+               <a href="https://www.facebook.com/" target="_blank" class="p-1 hover:text-emerald-200"><i class="ri-facebook-circle-fill"></i></a>
+               <a href="https://www.instagram.com/" target="_blank" class="p-1 hover:text-emerald-200"><i class="ri-instagram-fill"></i></a>
+               <a href="https://twitter.com/" target="_blank" class="p-1 hover:text-emerald-200"><i class="ri-twitter-x-line"></i></a>
+            </div>
+         </div>
+
+         <div class="text-center sm:text-right">
+            <h3 class="text-xs font-bold text-white code-font mb-2">Support Channel</h3>
+            <a href="https://www.patreon.com/Safew1" target="_blank" rel="noopener noreferrer" class="inline-block px-4 py-2 bg-emerald-500 text-emerald-950 font-bold rounded-lg text-xs code-font">
+               Subscribe on Patreon
+            </a>
+         </div>
+      </div>
+
+      <div class="text-center text-[11px] text-emerald-500/70 code-font border-t border-emerald-900 pt-4">
+         &#169; SaveTheSilent. All Rights Reserved
+      </div>
+   </footer>
+
+   <!--========== DETAIL MODAL (Responsive Sheet) ==========-->
+   <div id="impact-modal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm hidden p-0 sm:p-4">
+      <div class="mobile-sheet bg-emerald-950 border-t sm:border border-emerald-700 rounded-t-3xl sm:rounded-2xl max-w-xl w-full p-5 sm:p-6 relative max-h-[85vh] overflow-y-auto shadow-2xl">
+          <button onclick="closeModal()" class="absolute top-4 right-4 text-emerald-400 hover:text-white p-2" aria-label="Close modal">
+              <i data-lucide="x" class="w-6 h-6"></i>
+          </button>
+          <div id="modal-content"></div>
+      </div>
+   </div>
+
+   <!--=============== SCRIPT SECTION ===============-->
+   <script>
+      const customSpecies = [
+          { name: "Royal Bengal Tiger", cat: "Mammal", icon: "shield", criticality: "CRITICAL (98%)", domino: "Keeps herbivore herds moving, preventing forest soil erosion and safeguarding river headwaters.", stat: "800M+ People Rely on Tiger Watersheds", impacts: ["Freshwater Security: Preserves headwaters of major Asian rivers.", "Carbon Sink: Protects dense carbon-capturing forest canopy.", "Agricultural Shield: Regulates wild boar populations."] },
+          { name: "Honey Bee & Wild Bees", cat: "Insect", icon: "bug", criticality: "EXTINCTION THREAT (100%)", domino: "Pollinates flowering vegetation, enabling agricultural and wild plant reproduction.", stat: "35% of Global Food Crops Depend on Bees", impacts: ["Food Security: Essential pollinator for 100+ major commercial crops.", "Economic Value: Drives $200B+ annual farming output.", "Nutritional Health: Essential for seed, fruit, and nut production."] },
+          { name: "Sea Otter", cat: "Marine", icon: "waves", criticality: "HIGH (95%)", domino: "Preys on sea urchins to prevent the destruction of giant kelp forests.", stat: "Kelp Forests Absorb 20x More Carbon Than Trees", impacts: ["Climate Defense: Protects critical coastal blue carbon sinks.", "Fishery Protection: Preserves commercial fish breeding grounds.", "Storm Buffer: Dampens coastal storm wave impact."] },
+          { name: "African Elephant", cat: "Mammal", icon: "footprints", criticality: "CRITICAL (97%)", domino: "Clears dense brush and digs waterholes, creating vital access for hundreds of species.", stat: "Uncovers Water Access for 150+ Savannah Species", impacts: ["Water Provisioning: Uncovers subterranean water during droughts.", "Seed Dispersal: Spreads woody tree seeds over 50km radii.", "Landscape Architecture: Maintains savanna grassland balance."] },
+          { name: "Mycorrhizal Fungi", cat: "Flora", icon: "sprout", criticality: "EXTINCTION THREAT (99%)", domino: "Forms underground nutrient networks that feed over 90% of land plant root systems.", stat: "Connects 90%+ of Earth's Land Plants", impacts: ["Soil Fertility: Essential for terrestrial plant nutrient uptake.", "Carbon Storage: Locks gigatons of fungal carbon underground.", "Drought Resilience: Transports moisture directly into root zones."] },
+          { name: "Phytoplankton", cat: "Marine", icon: "droplets", criticality: "EXTINCTION THREAT (100%)", domino: "Forms the base of marine food webs and converts solar energy into atmospheric oxygen.", stat: "Produces 50%+ of Global Atmospheric Oxygen", impacts: ["Atmospheric Oxygen: Primary generator of Earth's oxygen.", "Carbon Capture: Absorbs 40% of all planetary CO2 emissions.", "Ocean Food Base: Essential food source for marine life."] }
+      ];
+
+      function generate100Species() {
+          const list = [...customSpecies];
+          const categories = [
+              { cat: "Mammal", icon: "shield", names: ["Grizzly Bear", "Grey Wolf", "Eurasian Beaver", "Jaguar", "Snow Leopard", "Pangolin", "Hippopotamus", "Snowshoe Hare", "Tapir", "Flying Fox Bat", "American Bison", "Wild Boar", "Dingo", "Mountain Lion", "Spotted Hyena", "Chimpanzee", "Orangutan", "Giant Anteater", "Nine-Banded Armadillo", "Polar Bear"] },
+              { cat: "Marine", icon: "waves", names: ["Great White Shark", "Blue Whale", "Humpback Whale", "Parrotfish", "Coral Polyps", "Antarctic Krill", "Giant Manta Ray", "Green Sea Turtle", "Mangrove Crab", "Eastern Oyster", "Giant Clam", "Sockeye Salmon", "Sea Cucumber", "Horseshoe Crab", "Orca", "Hammerhead Shark", "Eelgrass", "Nudibranch", "Sunflower Sea Star", "Barrel Sponge"] },
+              { cat: "Insect", icon: "bug", names: ["Leafcutter Ant", "Mound Termite", "Dung Beetle", "Monarch Butterfly", "Green Dragonfly", "Seven-Spot Ladybug", "Hoverfly", "Fig Wasp", "Ground Beetle", "Silk Moth", "Parasitic Wasp", "Firefly", "Periodical Cicada", "Tiger Beetle", "Mason Bee", "Bumblebee", "Army Ant", "Mayfly", "Stonefly", "Damselfly"] },
+              { cat: "Bird", icon: "feather", names: ["Harpy Eagle", "California Condor", "Rhinoceros Hornbill", "Keel-Billed Toucan", "Kea Parrot", "Wandering Albatross", "Brown Pelican", "Pileated Woodpecker", "Barn Owl", "Osprey", "Common Raven", "Ruby-Throated Hummingbird", "Greater Flamingo", "Emu", "Southern Cassowary", "Emperor Penguin", "Atlantic Puffin", "Great Blue Heron", "White-Backed Vulture", "Belted Kingfisher"] },
+              { cat: "Flora", icon: "sprout", names: ["Coast Redwood", "Red Mangrove", "Kapok Tree", "Sphagnum Peat Moss", "Eelgrass Bed", "African Baobab", "Black Willow", "Wild Rice", "Whistling Thorn Acacia", "Bracken Fern", "Reindeer Lichen", "Giant Kelp", "Moso Bamboo", "Tropical Pitcher Plant", "Saguaro Cactus", "Banyan Fig", "Blue Gum Eucalyptus", "English Oak", "Vanilla Orchid", "Earthstar Fungus"] }
+          ];
+
+          let count = list.length;
+          categories.forEach(c => {
+              c.names.forEach((pName, idx) => {
+                  if (count < 100) {
+                      list.push({
+                          name: pName,
+                          cat: c.cat,
+                          icon: c.icon,
+                          criticality: `HIGH (${85 + (idx % 12)}%)`,
+                          domino: `Maintains critical ecological balance and nutrient cycling across regional ${c.cat.toLowerCase()} ecosystems.`,
+                          stat: `Keystone Importance Rank #${count + 1}`,
+                          impacts: [
+                              `Ecosystem Integrity: Prevents trophic cascades in regional habitats.`,
+                              `Environmental Balance: Regulates local resource availability.`,
+                              `Biodiversity Support: Provides habitat structure for companion species.`
+                          ]
+                      });
+                      count++;
+                  }
+              });
+          });
+          return list;
+      }
+
+      const allSpecies = generate100Species();
+
+      function renderCards(data) {
+          const grid = document.getElementById('species-grid');
+          const emptyState = document.getElementById('empty-state');
+          grid.innerHTML = '';
+
+          if (data.length === 0) {
+              emptyState.classList.remove('hidden');
+              return;
+          } else {
+              emptyState.classList.add('hidden');
+          }
+
+          data.forEach((item) => {
+              const card = document.createElement('div');
+              card.className = "bg-emerald-950/80 border border-emerald-800/80 rounded-2xl glow-card transition-all cursor-pointer flex flex-col justify-between p-4 sm:p-5 active:scale-[0.99]";
+              card.onclick = () => openModal(item);
+
+              card.innerHTML = `
+                  <div>
+                      <div class="flex justify-between items-start mb-3">
+                          <div class="p-2.5 bg-emerald-900/80 rounded-xl text-emerald-400 border border-emerald-700 pulse-bg">
+                              <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+                          </div>
+                          <span class="text-[10px] code-font font-bold px-2.5 py-1 rounded-full bg-emerald-900 text-emerald-300 border border-emerald-700/60">
+                              ${item.criticality}
+                          </span>
+                      </div>
+                      <h3 class="text-base sm:text-lg font-bold text-white mb-0.5">${item.name}</h3>
+                      <p class="text-[11px] text-emerald-400 code-font mb-3">${item.cat} Classification</p>
+                      
+                      <div class="bg-emerald-900/40 rounded-xl p-2.5 sm:p-3 border border-emerald-800/80 mb-3">
+                          <span class="text-[9px] text-emerald-400 code-font font-semibold block mb-1">ECOSYSTEM ROLE:</span>
+                          <p class="text-xs text-emerald-200/90 line-clamp-2">${item.domino}</p>
+                      </div>
+                  </div>
+
+                  <div class="text-[10px] sm:text-[11px] text-emerald-400 code-font font-semibold flex items-center gap-1 mt-1">
+                      <i data-lucide="zap" class="w-3 h-3"></i> ${item.stat}
+                  </div>
+              `;
+              grid.appendChild(card);
+          });
+          lucide.createIcons();
+      }
+
+      function filterSpecies() {
+          const query = document.getElementById('search-input').value.trim().toLowerCase();
+          const clearBtn = document.getElementById('clear-btn');
+
+          if (query === "") {
+              clearBtn.classList.add('hidden');
+              renderCards([]);
+              return;
+          }
+
+          clearBtn.classList.remove('hidden');
+
+          const filtered = allSpecies.filter(s => 
+              s.name.toLowerCase().includes(query) || 
+              s.cat.toLowerCase().includes(query) || 
+              s.domino.toLowerCase().includes(query)
+          );
+          renderCards(filtered);
+      }
+
+      function setSearch(term) {
+          const input = document.getElementById('search-input');
+          input.value = term;
+          filterSpecies();
+      }
+
+      function clearSearch() {
+          const input = document.getElementById('search-input');
+          input.value = "";
+          filterSpecies();
+      }
+
+      function toggleMobileMenu() {
+          const menu = document.getElementById('mobile-menu');
+          menu.classList.toggle('hidden');
+      }
+
+      function handleFormSubmit(e) {
+          e.preventDefault();
+          const status = document.getElementById('form-status');
+          status.classList.remove('hidden');
+          e.target.reset();
+          setTimeout(() => {
+              status.classList.add('hidden');
+          }, 4000);
+      }
+
+      function openModal(item) {
+          const modal = document.getElementById('impact-modal');
+          const content = document.getElementById('modal-content');
+
+          content.innerHTML = `
+              <div class="flex items-center gap-3 mb-3 sm:mb-4 pr-6">
+                  <div class="p-2.5 bg-emerald-900 rounded-xl text-emerald-400 border border-emerald-700 shrink-0">
+                      <i data-lucide="${item.icon}" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                  </div>
+                  <div>
+                      <h3 class="text-xl sm:text-2xl font-bold text-white">${item.name}</h3>
+                      <p class="text-xs text-emerald-400 code-font">${item.cat} Category</p>
+                  </div>
+              </div>
+
+              <div class="my-3 sm:my-4 border-y border-emerald-800 py-3">
+                  <h4 class="text-[11px] font-bold text-emerald-400 code-font mb-2">CRITICAL ECOSYSTEM IMPACTS:</h4>
+                  <ul class="space-y-2">
+                      ${item.impacts.map(imp => `
+                          <li class="flex items-start gap-2 text-xs sm:text-sm text-emerald-100">
+                              <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                              <span>${imp}</span>
+                          </li>
+                      `).join('')}
+                  </ul>
+              </div>
+
+              <div class="bg-emerald-900/60 p-3 sm:p-4 rounded-xl border border-emerald-800 flex justify-between items-center">
+                  <span class="text-xs text-emerald-300 code-font">Impact Index</span>
+                  <span class="text-xs sm:text-sm font-bold text-emerald-400 code-font">${item.criticality}</span>
+              </div>
+          `;
+          
+          modal.classList.remove('hidden');
+          lucide.createIcons();
+      }
+
+      function closeModal() {
+          document.getElementById('impact-modal').classList.add('hidden');
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+          lucide.createIcons();
+          renderCards([]);
+      });
+   </script>
+</body>
+
+</html>
