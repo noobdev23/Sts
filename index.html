@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaveTheSilent | Wildlife Conservation, Media & Eco-Goods</title>
+    <style>
+        :root {
+            --bg-color: #0d1310;
+            --card-bg: #16201a;
+            --accent: #3b7a57;
+            --accent-hover: #4e9a6e;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #23352b;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: rgba(13, 19, 16, 0.98);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+        }
+        .logo {
+            font-weight: 800;
+            font-size: 1.2rem;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+        }
+        /* Navigation Links */
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 900px;
+            margin: 4rem auto 2rem auto;
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+        .hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            margin-bottom: 1.2rem;
+            color: #ffffff;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Section Layouts */
+        .section-container {
+            max-width: 1100px;
+            margin: 4rem auto;
+            padding: 0 1.5rem;
+        }
+        .section-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            margin-bottom: 2.5rem;
+            color: #ffffff;
+            font-weight: 700;
+        }
+        
+        /* About Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .about-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+        .product-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+            color: #ffffff;
+        }
+        .product-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 3.5rem 1.5rem;
+            text-align: center;
+            margin-top: 5rem;
+        }
+        .contact-section h3 {
+            font-size: 1.7rem;
+            margin-bottom: 0.8rem;
+            color: #ffffff;
+        }
+        .contact-section p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        .contact-details {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+        .contact-details a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            background-color: #090e0b;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Mobile Responsiveness Media Query */
+        @media(max-width: 768px) {
+            header {
+                padding: 1rem 4%;
+            }
+            nav {
+                gap: 1rem;
+            }
+            nav a {
+                font-size: 0.85rem;
+            }
+            .hero {
+                margin: 3rem auto 1.5rem auto;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+                gap: 1.5rem;
+            }
+            .section-container {
+                margin: 3rem auto;
+            }
+            .contact-details {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">SAVE THE SILENT</div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#products">Eco-Goods</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>Protecting the Voices of the Wild</h1>
+        <p>Documenting endangered habitats, tracking wildlife preservation corridors, and empowering conservation through independent media.</p>
+        <a href="https://patreon.com" class="btn" target="_blank">Join Our Patreon Community</a>
+    </section>
+
+    <div class="section-container" id="about">
+        <h2 class
